@@ -1,0 +1,19 @@
+services:
+  pma-db:
+    image: mysql:5.6
+    restart: always
+    ports:
+      - 3306:3306
+    environment:
+      - MYSQL_ROOT_PASSWORD
+  pma:
+    depends_on:
+      - pma-db
+    image: phpmyadmin
+    restart: always
+    ports:
+      - 80:80
+    environment:
+      - PMA_HOST=pma-db
+      # - PMA_PORT=3306
+      # - PMA_ARBITRARY=1

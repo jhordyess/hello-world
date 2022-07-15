@@ -1,0 +1,18 @@
+services:
+  pga-db:
+    image: postgres
+    restart: always
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRES_PASSWORD
+  pga:
+    depends_on:
+      - pga-db
+    image: dpage/pgadmin4
+    restart: always
+    ports:
+      - 5432:80
+    environment:
+      - PGADMIN_DEFAULT_EMAIL
+      - PGADMIN_DEFAULT_PASSWORD

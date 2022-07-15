@@ -1,0 +1,21 @@
+services:
+  wp-db:
+    image: mysql:5.7
+    restart: always
+    environment:
+      - MYSQL_RANDOM_ROOT_PASSWORD="1"
+      - MYSQL_USER
+      - MYSQL_PASSWORD
+      - MYSQL_DATABASE
+  wp:
+    image: wordpress
+    depends_on:
+      - wp-db
+    restart: always
+    ports:
+      - 80:80
+    environment:
+      - WORDPRESS_DB_HOST=wp-db
+      - WORDPRESS_DB_USER
+      - WORDPRESS_DB_PASSWORD
+      - WORDPRESS_DB_NAME

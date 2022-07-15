@@ -1,0 +1,16 @@
+services:
+  sqlserver-db:
+    image: mcr.microsoft.com/mssql/server:2019-latest
+    restart: always
+    ports:
+      - 1433:1433
+    environment:
+      - ACCEPT_EULA="Y"
+      - SA_PASSWORD
+  adminer:
+    image: adminer
+    depends_on:
+      - sqlserver-db
+    restart: always
+    ports:
+      - 8080:8080

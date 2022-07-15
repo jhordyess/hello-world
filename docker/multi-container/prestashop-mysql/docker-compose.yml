@@ -1,0 +1,26 @@
+services:
+  ps-db:
+    image: mysql:5.7
+    restart: always
+    environment:
+      - MYSQL_RANDOM_ROOT_PASSWORD="1"
+      - MYSQL_USER
+      - MYSQL_PASSWORD
+      - MYSQL_DATABASE
+  ps:
+    image: prestashop/prestashop
+    depends_on:
+      - ps-db
+    restart: always
+    ports:
+      - 80:80
+    environment:
+      # - PS_INSTALL_AUTO=1
+      - PS_FOLDER_ADMIN=ps-admin
+      # - PS_DOMAIN=localhost:80
+      # - PS_LANGUAGE=es
+      # - PS_COUNTRY=MX
+      - DB_SERVER=ps-db
+      - DB_USER
+      - DB_PASSWD
+      - DB_NAME

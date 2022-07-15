@@ -1,0 +1,19 @@
+services:
+  odoo-db:
+    image: postgres:14
+    restart: always
+    environment:
+      - POSTGRES_USER=odoo
+      - POSTGRES_PASSWORD
+      - POSTGRES_DB
+  odoo:
+    image: odoo:15
+    depends_on:
+      - odoo-db
+    restart: always
+    ports:
+      - 8069:8069
+    environment:
+      - HOST=odoo-db
+      - USER=odoo
+      - PASSWORD
