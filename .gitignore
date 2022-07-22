@@ -1,1 +1,3 @@
 *.env
+/jhiii.egg-info
+*__pycache__
